@@ -1,2 +1,2 @@
-# KSP-Torpedo-mb-client
+# KSP "Torpedo"
 Mobile android client for KSP Torpedo
