@@ -1,11 +1,11 @@
-package com.example.android.belousovas.ui
+package com.belousovas.kspapp.ui
 
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.belousovas.R
-import com.example.android.belousovas.data.Repository
+import com.belousovas.kspapp.data.Repository
 
 class MainFragment : Fragment(R.layout.main_fragment) {
 
@@ -15,12 +15,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.e("TTT", "MainFragment created");
-
         mainFragmentViewModel = ViewModelProvider(requireActivity())[MainFragmentViewModel::class.java]
 
-        var value = repository.getTourList()
-        Log.e("TTT", value.toString());
 
     }
 

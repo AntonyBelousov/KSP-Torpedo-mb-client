@@ -1,4 +1,4 @@
-package com.example.android.belousovas.domain.model
+package com.belousovas.kspapp.domain.model
 
 data class Tour(
     private val tableName : String,

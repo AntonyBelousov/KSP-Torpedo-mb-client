@@ -1,4 +1,4 @@
-package com.example.android.belousovas.data
+package com.belousovas.kspapp.data
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

@@ -1,10 +1,10 @@
-package com.example.android.belousovas.ui
+package com.belousovas.kspapp.ui
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.android.belousovas.data.Repository
-import com.example.android.belousovas.domain.model.Tour
+import com.belousovas.kspapp.data.Repository
+import com.belousovas.kspapp.domain.model.Tour
 import java.util.ArrayList
 
 class MainFragmentViewModel : ViewModel() {
@@ -15,7 +15,6 @@ class MainFragmentViewModel : ViewModel() {
 
     init {
         //tourList.value = repository.getTourList()
-        Log.e("TTT", "ViewModel created");
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.android.belousovas.data
+package com.belousovas.kspapp.data
 
 import retrofit2.Call
 import retrofit2.http.GET

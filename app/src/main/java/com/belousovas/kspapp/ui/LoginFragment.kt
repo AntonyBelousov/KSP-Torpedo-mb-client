@@ -1,4 +1,4 @@
-package com.example.android.belousovas.ui
+package com.belousovas.kspapp.ui
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.android.belousovas.R
-import com.example.android.belousovas.data.Repository
+import com.belousovas.kspapp.data.Repository
 
 class LoginFragment : Fragment(R.layout.login_fragment) {
 
@@ -18,9 +18,9 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
         val passwordField = view.findViewById<EditText>(R.id.edt_user_password)
         val signInBtn = view.findViewById<Button>(R.id.btn_sign_in)
 
-        signInBtn.setOnClickListener {
-            repository.login()
-        }
+//        signInBtn.setOnClickListener {
+//            repository.login()
+//        }
     }
 }
 

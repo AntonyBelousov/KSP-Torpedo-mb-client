@@ -1,7 +1,7 @@
-package com.example.android.belousovas.data
+package com.belousovas.kspapp.data
 
 import android.util.Log
-import com.example.android.belousovas.domain.model.Tour
+import com.belousovas.kspapp.domain.model.Tour
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import retrofit2.Call
@@ -12,9 +12,9 @@ import java.util.ArrayList
 class Repository {
 
 
-    fun login() : Boolean {
-        RetrofitInstance.api.login()
-    }
+//    fun login() : Boolean {
+//        RetrofitInstance.api.login()
+//    }
 
     fun getTourList() : ArrayList<Tour> {
         var htmlString = ""
