@@ -28,7 +28,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
         val signInBtn = view.findViewById<Button>(R.id.btn_sign_in)
 
         userName.setText("HoseAurelio")
-        userPassword.setText("32167_Allo")
+        userPassword.setText("Allo_KSP")
 
         loginFragmentViewModel.isLoginSuccess.observe(viewLifecycleOwner, {
             if (it) {
