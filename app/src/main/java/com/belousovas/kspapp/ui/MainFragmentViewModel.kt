@@ -10,13 +10,14 @@ import java.util.ArrayList
 class MainFragmentViewModel : ViewModel() {
 
     private val repository = Repository()
-
-    private val tourList = MutableLiveData<ArrayList<Tour>>()
+    var tourList = MutableLiveData<List<Tour>>()
 
     init {
-        //tourList.value = repository.getTourList()
+        getTourList()
     }
 
-
+    private fun getTourList() {
+        repository.getTourList(tourList)
+    }
 
 }

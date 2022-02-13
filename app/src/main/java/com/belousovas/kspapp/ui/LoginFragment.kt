@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.belousovas.R
 import com.belousovas.kspapp.data.Repository
+import java.io.File
 
 class LoginFragment : Fragment(R.layout.login_fragment) {
 
@@ -27,12 +28,14 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
         val userPassword = view.findViewById<EditText>(R.id.edt_user_password)
         val signInBtn = view.findViewById<Button>(R.id.btn_sign_in)
 
-        userName.setText("HoseAurelio")
-        userPassword.setText("")
+
+        val reader : List<String>
+        resources.openRawResource(R.raw.myconf).bufferedReader().use { reader = it.readLines() }
+        userName.setText(reader[0])
+        userPassword.setText(reader[1])
 
         loginFragmentViewModel.isLoginSuccess.observe(viewLifecycleOwner, {
             if (it) {
-                Log.e("TTT", "it = $it")
                 findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
             } else {
                 Toast.makeText(context, "Ошибка при авторизации", Toast.LENGTH_SHORT)
@@ -51,18 +54,6 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
                 Toast.makeText(context, "Некорректный логин или пароль", Toast.LENGTH_SHORT).show()
             }
         }
-
-//        signInBtn.setOnClickListener {
-//            if (userName.text.isNotEmpty() && userPassword.text.isNotEmpty()) {
-//                repository.login(
-//                    user = userName.text.toString(),
-//                    password = userPassword.text.toString()
-//                )
-//            } else {
-//                // Todo: Show message: "Некорректный логин или пароль"
-//                Toast.makeText(context, "Некорректный логин или пароль", Toast.LENGTH_SHORT).show()
-//            }
-//        }
 
     }
 

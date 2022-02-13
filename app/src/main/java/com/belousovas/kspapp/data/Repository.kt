@@ -2,9 +2,7 @@ package com.belousovas.kspapp.data
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.belousovas.kspapp.domain.model.Tour
-import com.belousovas.kspapp.ui.LoginFragmentViewModel
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import retrofit2.Call
@@ -14,8 +12,28 @@ import java.util.ArrayList
 
 class Repository {
 
-    private var sessionId: String =
-        getSessionId() // ToDo: add saving session cookie to local storage
+    init {
+        setSessionCookie()
+    }
+
+    companion object {
+        private var sessionId: String = "null"
+        fun setSessionCookie(){
+            // ToDo: add saving session cookie to local storage
+            if (sessionId == "null") {
+                RetrofitInstance.api.getCookie().enqueue(object : Callback<String> {
+                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                        sessionId = response.headers().get("Set-Cookie").toString().split(";")[0]
+                    }
+
+                    override fun onFailure(call: Call<String>, t: Throwable) {
+                        Log.e("TTT", "Request error - getSessionId() $javaClass")
+                    }
+
+                })
+            }
+        }
+    }
 
 
     fun login(user: String, password: String, loginStatus: MutableLiveData<Boolean>) {
@@ -33,34 +51,18 @@ class Repository {
     }
 
 
-    private fun getSessionId(): String {
-        RetrofitInstance.api.getMainPage().enqueue(object : Callback<String> {
+    fun getTourList(tourList: MutableLiveData<List<Tour>>) {
+        RetrofitInstance.api.getMainPage(sessionId).enqueue(object : Callback<String> {
+
             override fun onResponse(call: Call<String>, response: Response<String>) {
-                sessionId = response.headers().get("Set-Cookie").toString().split(";")[0]
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.e("TTT", "Request error - getSessionId() $javaClass")
-            }
-
-        })
-        return sessionId
-    }
-
-    fun getTourList(): ArrayList<Tour> {
-        var htmlString = ""
-        RetrofitInstance.api.getMainPage().enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                htmlString = response.body().toString()
+                tourList.value = convertTourList(response.body().toString())
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Log.e("TTT", "Request error - getTourList() $javaClass")
             }
-
         })
 
-        return convertTourList(htmlString)
     }
 
     private fun convertTourList(response: String): ArrayList<Tour> {
@@ -77,5 +79,6 @@ class Repository {
         }
         return tourList
     }
+
 
 }

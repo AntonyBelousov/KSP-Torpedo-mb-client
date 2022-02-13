@@ -19,7 +19,10 @@ interface Api {
     ): Call<String>
 
     @GET("./")
-    fun getMainPage(): Call<String>
+    fun getMainPage(@Header("Cookie") cookie : String): Call<String>
+
+    @GET("./")
+    fun getCookie(): Call<String>
 
     @GET("./bet.php")
     fun getTourById(): Call<String>
