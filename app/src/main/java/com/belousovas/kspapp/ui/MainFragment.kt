@@ -11,28 +11,28 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.belousovas.R
 import com.belousovas.kspapp.domain.model.Tour
-import android.widget.TextView
-
-
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 
 
 class MainFragment : Fragment(R.layout.main_fragment) {
 
-    private lateinit var mainFragmentViewModel : MainFragmentViewModel
+    private lateinit var mainViewModel: MainViewModel
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onStart() {
+        super.onStart()
 
-        mainFragmentViewModel = ViewModelProvider(requireActivity())[MainFragmentViewModel::class.java]
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
-        mainFragmentViewModel.tourList.observe(viewLifecycleOwner, {
-            if(it.isNotEmpty()) createTourListView(it)
+        mainViewModel.tourList.observe(this, {
+            if (it.isNotEmpty()) createTourListView(it)
         })
     }
 
-
     private fun createTourListView(openTours: List<Tour>) {
         val parent = view!!.findViewById<LinearLayout>(R.id.ll_main_tour_list)
+
+        parent.removeAllViews()
 
         val parentParams = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -45,13 +45,12 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             btn.gravity = 1
             btn.setTextColor(Color.parseColor("#000000"))
             btn.setBackgroundColor(Color.parseColor("#B388FF"))
-            btn.text = tour.tableName
+            btn.text = tour.tourName
             parent.addView(btn, parentParams)
-//            btn.setOnClickListener {
-//                val bundle = Bundle()
-//                bundle.putString("tableLink", link)
-//                findNavController().navigate(R.id.action_mainFragment_to_tableFragment, bundle)
-//            }
+            btn.setOnClickListener {
+                val bundle = bundleOf("tourId" to tour.tourId, "tourName" to tour.tourName)
+                findNavController().navigate(R.id.action_mainFragment_to_tourFragment, bundle)
+            }
         }
     }
 

@@ -25,7 +25,7 @@ interface Api {
     fun getCookie(): Call<String>
 
     @GET("./bet.php")
-    fun getTourById(): Call<String>
+    fun getTourById(@Header("Cookie") cookie : String, @Query("tour_id") tourId : String): Call<String>
 
     @GET("./table.php")
     fun getTableById(): Call<String>

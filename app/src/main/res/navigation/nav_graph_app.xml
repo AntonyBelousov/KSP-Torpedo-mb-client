@@ -7,13 +7,25 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.belousovas.kspapp.ui.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_tourFragment"
+            app:destination="@id/tourFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.belousovas.kspapp.ui.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tourFragment"
+        android:name="com.belousovas.kspapp.ui.TourFragment"
+        android:label="TourFragment" >
+        <action
+            android:id="@+id/action_tourFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

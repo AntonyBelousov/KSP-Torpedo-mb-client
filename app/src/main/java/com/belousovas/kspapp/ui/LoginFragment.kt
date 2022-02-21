@@ -1,9 +1,7 @@
 package com.belousovas.kspapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -11,18 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.belousovas.R
-import com.belousovas.kspapp.data.Repository
-import java.io.File
 
 class LoginFragment : Fragment(R.layout.login_fragment) {
 
-    private lateinit var loginFragmentViewModel: LoginFragmentViewModel
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loginFragmentViewModel =
-            ViewModelProvider(requireActivity()).get(LoginFragmentViewModel::class.java)
+        loginViewModel =
+            ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
 
         val userName = view.findViewById<EditText>(R.id.edt_user_login)
         val userPassword = view.findViewById<EditText>(R.id.edt_user_password)
@@ -34,7 +30,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
         userName.setText(reader[0])
         userPassword.setText(reader[1])
 
-        loginFragmentViewModel.isLoginSuccess.observe(viewLifecycleOwner, {
+        loginViewModel.isLoginSuccess.observe(viewLifecycleOwner, {
             if (it) {
                 findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
             } else {
@@ -45,7 +41,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
         signInBtn.setOnClickListener {
             if (userName.text.isNotEmpty() && userPassword.text.isNotEmpty()) {
-                loginFragmentViewModel.login(
+                loginViewModel.login(
                     user = userName.text.toString(),
                     password = userPassword.text.toString()
                 )

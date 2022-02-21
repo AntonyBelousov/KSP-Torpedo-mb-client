@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.belousovas.kspapp.data.Repository
 
-class LoginFragmentViewModel : ViewModel() {
+class LoginViewModel : ViewModel() {
     private val repository = Repository()
     var isLoginSuccess = MutableLiveData<Boolean>()
 

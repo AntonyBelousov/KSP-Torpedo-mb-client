@@ -7,7 +7,7 @@ import com.belousovas.kspapp.data.Repository
 import com.belousovas.kspapp.domain.model.Tour
 import java.util.ArrayList
 
-class MainFragmentViewModel : ViewModel() {
+class MainViewModel : ViewModel() {
 
     private val repository = Repository()
     var tourList = MutableLiveData<List<Tour>>()
